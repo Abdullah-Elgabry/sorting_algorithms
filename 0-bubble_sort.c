@@ -22,28 +22,27 @@ void the_swaper(int *x, int *y)
  * @size: the [] size.
  *
  */
-
 void bubble_sort(int *array, size_t size)
 {
-	size_t xl, siz = size;
-	int chx = 0;
+	size_t i, len = size;
+	int bubbly = 0;
 
 	if (array == NULL || size < 2)
 		return;
 
-	while (chx == 0)
+	while (bubbly == 0)
 	{
-		chx = 1;
-		for (xl = 0; xl < siz - 1; xl++)
+		bubbly = 1;
+		for (i = 0; i < len - 1; i++)
 		{
-			if (array[xl] > array[xl + 1])
+			if (array[i] > array[i + 1])
 			{
-				the_swaper(array + xl, array + xl + 1);
+				the_swaper(array + i, array + i + 1);
 				print_array(array, size);
-				chx = 0;
+				bubbly = 0;
 			}
 		}
-		siz--;
+		len--;
 	}
 }
 
