@@ -10,8 +10,8 @@
 /**
  * enum bool - val lmnb
  *
- * @false: means 0
  * @true: means 1
+ * @false: means 0
  *
  */
 typedef enum bool
