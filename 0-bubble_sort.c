@@ -1,17 +1,17 @@
 #include "sort.h"
 
 /**
- * the_swaper - this func will swaps integers
- * @x: Pointer to the first integer
- * @y: Pointer to the second integer
+ * swap_ints - this func will swaps integers
+ * @a: Pointer to the first integer
+ * @b: Pointer to the second integer
  */
-void the_swaper(int *x, int *y)
+void swap_ints(int *a, int *b)
 {
 	int tmp;
 
-	tmp = *x;
-	*x = *y;
-	*y = tmp;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 /**
@@ -20,7 +20,6 @@ void the_swaper(int *x, int *y)
  * @array: [int].
  *
  * @size: the [] size.
- *
  */
 void bubble_sort(int *array, size_t size)
 {
@@ -37,7 +36,7 @@ void bubble_sort(int *array, size_t size)
 		{
 			if (array[i] > array[i + 1])
 			{
-				the_swaper(array + i, array + i + 1);
+				swap_ints(array + i, array + i + 1);
 				print_array(array, size);
 				bubbly = 0;
 			}
