@@ -3,22 +3,22 @@
 /**
  * swaper - this func will exchange 2 of nodes
  * @h: ptr
- * @xlm: 1st node
+ * @n1: 1st node
  * @xlv: 2nd node
  */
-void swaper(listing_t **h, listing_t **xlm, listing_t *xlv)
+void swaper(listing_t **h, listing_t **n1, listing_t *n2)
 {
-	(*xlm)->next = xlv->next;
-	if (xlv->next != NULL)
-		xlv->next->prev = *xlm;
-	xlv->prev = (*xlm)->prev;
-	xlv->next = *xlm;
-	if ((*xlm)->prev != NULL)
-		(*xlm)->prev->next = xlv;
+	(*n1)->next = n2->next;
+	if (n2->next != NULL)
+		n2->next->prev = *n1;
+	n2->prev = (*n1)->prev;
+	n2->next = *n1;
+	if ((*n1)->prev != NULL)
+		(*n1)->prev->next = n2;
 	else
-		*h = xlv;
-	(*xlm)->prev = xlv;
-	*xlm = xlv->prev;
+		*h = n2;
+	(*n1)->prev = n2;
+	*n1 = n2->prev;
 }
 
 /**
@@ -27,20 +27,21 @@ void swaper(listing_t **h, listing_t **xlm, listing_t *xlv)
  * @list: [ptr]
  *
  */
+
 void insertion_sort_list(listing_t **list)
 {
-	listing_t *tpl, *insert, *tmp;
+	listing_t *iter, *insert, *tmp;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	for (tpl = (*list)->next; tpl != NULL; tpl = tmp)
+	for (iter = (*list)->next; iter != NULL; iter = tmp)
 	{
-		tmp = tpl->next;
-		insert = tpl->prev;
-		while (insert != NULL && tpl->n < insert->n)
+		tmp = iter->next;
+		insert = iter->prev;
+		while (insert != NULL && iter->n < insert->n)
 		{
-			swaper(list, &insert, tpl);
+			swap_nodes(list, &insert, iter);
 			print_list((const listing_t *)*list);
 		}
 	}
