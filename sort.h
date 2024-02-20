@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DOWN 1
-#define UP 0
+#define YES 1
+#define NO 0
 
 /**
  * enum bool - val lmnb

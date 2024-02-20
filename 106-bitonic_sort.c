@@ -37,8 +37,8 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char ph)
 	{
 		for (xml = start; xml < start + tke; xml++)
 		{
-			if ((ph == UP && array[xml] > array[xml + tke]) ||
-			    (ph == DOWN && array[xml] < array[xml + tke]))
+			if ((ph == NO && array[xml] > array[xml + tke]) ||
+			    (ph == YES && array[xml] < array[xml + tke]))
 				swap_ints(array + xml, array + xml + tke);
 		}
 		bitonic_merge(array, size, start, tke, ph);
@@ -57,15 +57,15 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char ph)
 void bitonic_seq(int *array, size_t size, size_t start, size_t mec, char ph)
 {
 	size_t cut = mec / 2;
-	char *str = (ph == UP) ? "UP" : "DOWN";
+	char *str = (ph == NO) ? "NO" : "YES";
 
 	if (mec > 1)
 	{
 		printf("Merging [%lu/%lu] (%s):\n", mec, size, str);
 		print_array(array + start, mec);
 
-		bitonic_seq(array, size, start, cut, UP);
-		bitonic_seq(array, size, start + cut, cut, DOWN);
+		bitonic_seq(array, size, start, cut, NO);
+		bitonic_seq(array, size, start + cut, cut, YES);
 		bitonic_merge(array, size, start, mec, ph);
 
 		printf("Result [%lu/%lu] (%s):\n", mec, size, str);
@@ -86,5 +86,5 @@ void bitonic_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	bitonic_seq(array, size, 0, size, UP);
+	bitonic_seq(array, size, 0, size, NO);
 }
