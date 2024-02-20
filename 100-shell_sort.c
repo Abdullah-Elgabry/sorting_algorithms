@@ -18,7 +18,7 @@ void swap_ints(int *a, int *b)
 
 /**
  * shell_sort - based_on this algo order asc.
- * 
+ *
  * @array: [int]
  *
  * @size: [size]
@@ -28,10 +28,9 @@ void swap_ints(int *a, int *b)
 void shell_sort(int *array, size_t size)
 {
 	size_t the_hl, bl, cl;
-	
+
 	if (array == NULL || size < 2)
 		return;
-
 
     for (the_hl = 1; the_hl < (size / 3);)
         the_hl = the_hl * 3 + 1;
