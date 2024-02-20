@@ -1,10 +1,5 @@
 #include "sort.h"
 
-void swap_ints(int *a, int *b);
-void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char pth);
-void bitonic_seq(int *array, size_t size, size_t start, size_t mec, char pth);
-void bitonic_sort(int *array, size_t size);
-
 /**
  * swap_ints - this func will re-order integers
  * @a: 1st int
