@@ -46,6 +46,8 @@ void heap_sort(int *array, size_t size);
 void swap_ints(int *a, int *b);
 void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char ph);
 void bitonic_seq(int *array, size_t size, size_t start, size_t mec, char ph);
+void swaper(listing_t **h, listing_t **xlm, listing_t *xlv);
+void insertion_sort_list(listing_t **list);
 void bitonic_sort(int *array, size_t size);
 void quick_sort_hoare(int *array, size_t size);
 void quick_sort(int *array, size_t size);
