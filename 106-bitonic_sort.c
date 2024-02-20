@@ -25,11 +25,11 @@ void swap_ints(int *a, int *b)
  *
  * @mec: [siz]
  *
- * @pth: the pth will be taken
+ * @ph: the ph will be taken
  *
  */
 
-void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char pth)
+void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char ph)
 {
 	size_t xml, tke = mec / 2;
 
@@ -37,12 +37,12 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char pth)
 	{
 		for (xml = start; xml < start + tke; xml++)
 		{
-			if ((pth == UP && array[xml] > array[xml + tke]) ||
-			    (pth == DOWN && array[xml] < array[xml + tke]))
+			if ((ph == UP && array[xml] > array[xml + tke]) ||
+			    (ph == DOWN && array[xml] < array[xml + tke]))
 				swap_ints(array + xml, array + xml + tke);
 		}
-		bitonic_merge(array, size, start, tke, pth);
-		bitonic_merge(array, size, start + tke, tke, pth);
+		bitonic_merge(array, size, start, tke, ph);
+		bitonic_merge(array, size, start + tke, tke, ph);
 	}
 }
 
@@ -52,12 +52,12 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t mec, char pth)
  * @size: [size]
  * @start: The starting index of a block of the building bitonic sequence.
  * @mec: The size of a block of the building bitonic sequence.
- * @pth: The direction to sort the bitonic sequence block in.
+ * @ph: The direction to sort the bitonic sequence block in.
  */
-void bitonic_seq(int *array, size_t size, size_t start, size_t mec, char pth)
+void bitonic_seq(int *array, size_t size, size_t start, size_t mec, char ph)
 {
 	size_t cut = mec / 2;
-	char *str = (pth == UP) ? "UP" : "DOWN";
+	char *str = (ph == UP) ? "UP" : "DOWN";
 
 	if (mec > 1)
 	{
@@ -66,7 +66,7 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t mec, char pth)
 
 		bitonic_seq(array, size, start, cut, UP);
 		bitonic_seq(array, size, start + cut, cut, DOWN);
-		bitonic_merge(array, size, start, mec, pth);
+		bitonic_merge(array, size, start, mec, ph);
 
 		printf("Result [%lu/%lu] (%s):\n", mec, size, str);
 		print_array(array + start, mec);
