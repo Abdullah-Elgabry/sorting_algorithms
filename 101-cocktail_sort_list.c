@@ -1,48 +1,101 @@
 #include "sort.h"
 
-/**
- * swaper - this func will exchange 2 of nodes
- * @h: ptr
- * @xlm: 1st node
- * @xlv: 2nd node
- */
+void swap_node_ahead(listing_t **list, listing_t **hep, listing_t **mixer);
+void swap_node_behind(listing_t **list, listing_t **hep, listing_t **mixer);
+void cocktail_sort_list(listing_t **list);
 
-void swaper(listing_t **h, listing_t **xlm, listing_t *xlv)
+/**
+ * swap_node_ahead - this func will move the int to order them asc
+ * @list: *head
+ * @hep: *hep
+ * @mixer: my pos now
+ */
+void swap_node_ahead(listing_t **list, listing_t **hep, listing_t **mixer)
 {
-	(*xlm)->next = xlv->next;
-	if (xlv->next != NULL)
-		xlv->next->prev = *xlm;
-	xlv->prev = (*xlm)->prev;
-	xlv->next = *xlm;
-	if ((*xlm)->prev != NULL)
-		(*xlm)->prev->next = xlv;
+	listing_t *tmp = (*mixer)->next;
+
+	if ((*mixer)->prev != NULL)
+		(*mixer)->prev->next = tmp;
 	else
-		*h = xlv;
-	(*xlm)->prev = xlv;
-	*xlm = xlv->prev;
+		*list = tmp;
+	tmp->prev = (*mixer)->prev;
+	(*mixer)->next = tmp->next;
+	if (tmp->next != NULL)
+		tmp->next->prev = *mixer;
+	else
+		*hep = *mixer;
+	(*mixer)->prev = tmp;
+	tmp->next = *mixer;
+	*mixer = tmp;
 }
 
 /**
- * insertion_sort_list - this func will reaarange the int
+ * swap_node_behind - this func will move the int to order them asc backword
+ * @list: *head
  *
- * @list: [ptr]
+ * @hep: *hep
+ *
+ * @mixer: my pos now.
+ */
+
+void swap_node_behind(listing_t **list, listing_t **hep, listing_t **mixer)
+{
+	listing_t *tmp = (*mixer)->prev;
+
+	if ((*mixer)->next != NULL)
+		(*mixer)->next->prev = tmp;
+	else
+		*hep = tmp;
+	tmp->next = (*mixer)->next;
+	(*mixer)->prev = tmp->prev;
+	if (tmp->prev != NULL)
+		tmp->prev->next = *mixer;
+	else
+		*list = *mixer;
+	(*mixer)->next = tmp;
+	tmp->prev = *mixer;
+	*mixer = tmp;
+}
+
+/**
+ * cocktail_sort_list - re_order the [] based_on cocktail_algo
+ *
+ * @list: *head
  *
  */
-void insertion_sort_list(listing_t **list)
+
+void cocktail_sort_list(listing_t **list)
 {
-	listing_t *tpl, *insert, *tmp;
+	listing_t *hep, *mixer;
+	bool shaken_not_stirred = false;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	for (tpl = (*list)->next; tpl != NULL; tpl = tmp)
+	for (hep = *list; hep->next != NULL;)
+		hep = hep->next;
+
+	while (shaken_not_stirred == false)
 	{
-		tmp = tpl->next;
-		insert = tpl->prev;
-		while (insert != NULL && tpl->n < insert->n)
+		shaken_not_stirred = true;
+		for (mixer = *list; mixer != hep; mixer = mixer->next)
 		{
-			swaper(list, &insert, tpl);
-			print_list((const listing_t *)*list);
+			if (mixer->n > mixer->next->n)
+			{
+				swap_node_ahead(list, &hep, &mixer);
+				print_list((const listing_t *)*list);
+				shaken_not_stirred = false;
+			}
+		}
+		for (mixer = mixer->prev; mixer != *list;
+				mixer = mixer->prev)
+		{
+			if (mixer->n < mixer->prev->n)
+			{
+				swap_node_behind(list, &hep, &mixer);
+				print_list((const listing_t *)*list);
+				shaken_not_stirred = false;
+			}
 		}
 	}
 }
