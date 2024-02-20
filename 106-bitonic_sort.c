@@ -1,20 +1,6 @@
 #include "sort.h"
 
 /**
- * swap_ints - this func will re-order integers
- * @a: 1st int
- * @b: 2nd int
- */
-void swap_ints(int *a, int *b)
-{
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-/**
  * bitonic_merge - this func will re_order the [] based_on bitonic algo
  *
  * @array: [int]
